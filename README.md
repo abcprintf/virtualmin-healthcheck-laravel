@@ -68,4 +68,5 @@ To run the script every minute, add to crontab:
 ## 📄 Log Example
 
 ```bash
-tail -f /var/log/healthcheck-abcprintf.com.log```
+tail -f /var/log/healthcheck-abcprintf.com.log
+```
