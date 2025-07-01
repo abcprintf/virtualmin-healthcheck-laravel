@@ -62,6 +62,7 @@ sudo chmod +x /usr/local/bin/healthcheck-multiple-domains.sh
 To run the script every minute, add to crontab:
 
 ```bash
+sudo crontab -e
 * * * * * /usr/local/bin/healthcheck-single-domain.sh
 ```
 
