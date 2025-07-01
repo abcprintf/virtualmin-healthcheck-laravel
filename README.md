@@ -62,6 +62,7 @@ sudo chmod +x /usr/local/bin/healthcheck-multiple-domains.sh
 To run the script every minute, add to crontab:
 
 ```bash
+sudo crontab -e
 * * * * * /usr/local/bin/healthcheck-single-domain.sh
 ```
 
@@ -69,4 +70,33 @@ To run the script every minute, add to crontab:
 
 ```bash
 tail -f /var/log/healthcheck-abcprintf.com.log
+```
+
+## 🔁 Logrotate Configuration
+To prevent log files from growing indefinitely, set up log rotation by creating a file in `/etc/logrotate.d/`:
+
+```bash
+sudo nano /etc/logrotate.d/healthcheck-abcprintf.com
+
+/var/log/healthcheck-abcprintf.com.log {
+    monthly
+    rotate 12
+    compress
+    missingok
+    notifempty
+    copytruncate
+    su root root
+    dateext
+    dateformat -%Y-%m
+}
+```
+
+### Test run logrotate:
+```bash
+sudo logrotate -f /etc/logrotate.d/healthcheck-abcprintf.com
+```
+
+### Check log file size:
+```bash
+ls -lh /var/log/healthcheck-abcprintf.com.log*
 ```
